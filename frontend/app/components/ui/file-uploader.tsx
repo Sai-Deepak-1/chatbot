@@ -49,6 +49,41 @@ export default function FileUploader({
     fileInput.value = "";
   };
 
+  const handleUpload = async (file: File) => {
+    const onFileUploadError = onFileError || window.alert;
+    const fileExtension = file.name.split(".").pop() || "";
+    const extensionError = checkExtension(fileExtension);
+    if (extensionError) {
+      return onFileUploadError(extensionError);
+    }
+
+    if (isFileSizeExceeded(file)) {
+      return onFileUploadError(
+        `File size exceeded. Limit is ${fileSizeLimit / 1024 / 1024} MB`
+      );
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/chat/upload/", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message); // Success alert
+      } else {
+        alert(result.message); // Failure alert
+      }
+    } catch (error) {
+      onFileUploadError("Error uploading file."); // Network error or other issues
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -56,24 +91,6 @@ export default function FileUploader({
     setUploading(true);
     await handleUpload(file);
     resetInput();
-    setUploading(false);
-  };
-
-  const handleUpload = async (file: File) => {
-    const onFileUploadError = onFileError || window.alert;
-    const fileExtension = file.name.split(".").pop() || "";
-    const extensionFileError = checkExtension(fileExtension);
-    if (extensionFileError) {
-      return onFileUploadError(extensionFileError);
-    }
-
-    if (isFileSizeExceeded(file)) {
-      return onFileUploadError(
-        `File size exceeded. Limit is ${fileSizeLimit / 1024 / 1024} MB`,
-      );
-    }
-
-    await onFileUpload(file);
   };
 
   return (
@@ -91,7 +108,7 @@ export default function FileUploader({
         className={cn(
           buttonVariants({ variant: "secondary", size: "icon" }),
           "cursor-pointer",
-          uploading && "opacity-50",
+          uploading && "opacity-50"
         )}
       >
         {uploading ? (

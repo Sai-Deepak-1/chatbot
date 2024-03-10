@@ -15,7 +15,7 @@ export default function Header() {
           <span>Built by LlamaIndex</span>
           <Image
             className="rounded-xl"
-            src="/llama.png"
+            src="/bot.png"
             alt="Llama Logo"
             width={40}
             height={40}

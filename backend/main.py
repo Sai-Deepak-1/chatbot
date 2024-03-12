@@ -1,7 +1,4 @@
 from dotenv import load_dotenv
-
-load_dotenv()
-
 import logging
 import os
 import uvicorn
@@ -9,7 +6,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routers.chat import chat_router
 from app.settings import init_settings
+from mangum import Mangum
 
+load_dotenv()
 
 app = FastAPI()
 
@@ -31,6 +30,7 @@ if environment == "dev":
 
 app.include_router(chat_router, prefix="/api/chat")
 
+handler = Mangum(app=app)
 
 if __name__ == "__main__":
     uvicorn.run(app="main:app", host="0.0.0.0", reload=True)

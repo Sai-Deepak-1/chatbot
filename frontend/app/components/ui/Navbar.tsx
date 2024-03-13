@@ -2,7 +2,7 @@
 import React, { useContext,useState } from 'react';
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import AuthContext  from "./AuthContext";
+// import AuthContext  from "./AuthContext";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -13,7 +13,7 @@ const navigation = [
 ];
 
 const Navbar = () => {
-  const { user, login, logout, authReady } = useContext(AuthContext)
+  // const { user, login, logout, authReady } = useContext(AuthContext)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <header className="absolute inset-x-0 top-0 z-50">

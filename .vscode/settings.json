@@ -1,4 +1,7 @@
 {
     "python.analysis.autoImportCompletions": true,
-    "css.customData": [".vscode/tailwind.json"],
+    "css.customData": [
+        ".vscode/tailwind.json"
+    ],
+    "git.ignoreLimitWarning": true,
 }

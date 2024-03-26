@@ -67,7 +67,7 @@ export default function FileUploader({
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://http://34.217.27.6/api/chat/upload/", {
+      const response = await fetch("http://localhost:8000/api/chat/upload/", {
         method: "POST",
         body: formData,
       });

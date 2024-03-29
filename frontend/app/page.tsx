@@ -45,12 +45,12 @@ export default function Example() {
               >
                 Get started
               </a>
-              <a
+              {/* <a
                 href="/register"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Not a User, Register <span aria-hidden="true"> →</span>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

@@ -74,12 +74,3 @@ async def upload_file(file: UploadFile = File(...)):
         )
     else:
         return JSONResponse(status_code=500, content={"message": "File upload failed"})
-
-# @r.post("/signin/")
-# async def signin():
-#     if username == password :
-#         return JSONResponse(
-#             status_code=200, content={"message": "Signed In successfully"}
-#         )
-#     else :
-#         return JSONResponse(status_code=500, content={"message": "Sign In failed"})

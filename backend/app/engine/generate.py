@@ -6,6 +6,7 @@ load_dotenv()
 
 import os
 import logging
+from llama_index.core.settings import Settings
 from llama_index.core.storage import StorageContext
 from llama_index.core.indices import VectorStoreIndex
 from llama_index.vector_stores.pinecone import PineconeVectorStore
@@ -29,6 +30,7 @@ def generate_datasource():
     VectorStoreIndex.from_documents(
         documents,
         storage_context=storage_context,
+        embed_model = 'local',
         show_progress=True,  # this will show you a progress bar as the embeddings are created
     )
     logger.info(
